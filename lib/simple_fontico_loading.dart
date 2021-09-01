@@ -188,6 +188,7 @@ class SimpleFontelicoProgressDialog {
       {@required String? message,
       SimpleFontelicoProgressDialogType type =
           SimpleFontelicoProgressDialogType.normal,
+       bool useRootNavigator: false,
       double height = 100,
       double width = 120,
       double radius = 5.0,
@@ -212,6 +213,7 @@ class SimpleFontelicoProgressDialog {
         context: context!,
         barrierDismissible: barrierDimisable!,
         useSafeArea: true,
+        useRootNavigator: false,
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () => Future.value(barrierDimisable),
