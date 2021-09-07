@@ -36,6 +36,9 @@ class SimpleFontelicoProgressDialog {
 
   /// Bool value to indicate the barrierDismisable of the dialog
   final bool? barrierDimisable;
+  
+  /// Bool value to indicate if we use root navigator of the dialog
+  final bool? useRootNavigator;
 
   /// Duration for animation
   final Duration? duration;
@@ -49,6 +52,7 @@ class SimpleFontelicoProgressDialog {
   SimpleFontelicoProgressDialog(
       {this.context,
       this.barrierDimisable,
+      this.useRootNavigator, 
       this.duration = const Duration(milliseconds: 1000)});
 
   /// Method to render the widget into the dialog
@@ -213,7 +217,7 @@ class SimpleFontelicoProgressDialog {
         context: context!,
         barrierDismissible: barrierDimisable!,
         useSafeArea: true,
-        useRootNavigator: false,
+        useRootNavigator: useRootNavigator,
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () => Future.value(barrierDimisable),
