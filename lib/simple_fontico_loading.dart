@@ -298,12 +298,10 @@ class SimpleFontelicoProgressDialog {
           : SizedBox(
               width: separation,
             ),
-      horizontal ? Expanded(child:Text(
+      Expanded(child:Text(
         message!,
+        overflow: TextOverflow.ellipsis,
         style: textStyle,
-      )) : Expanded(child:Text(
-          message!,
-          style: textStyle,
       ))
 
     ];
