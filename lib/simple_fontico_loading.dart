@@ -235,21 +235,24 @@ class SimpleFontelicoProgressDialog {
                         color: backgroundColor,
                         borderRadius:
                             BorderRadius.all(Radius.circular(radius))),
-                    child: !horizontal
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: _getChildren(type, _message, horizontal,
-                                separation, textStyle, hideText),
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: _getChildren(type, _message, horizontal,
-                                separation, textStyle, hideText),
-                          ),
+                    child:Padding(
+                      child : !horizontal
+                          ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: _getChildren(type, _message, horizontal,
+                            separation, textStyle, hideText),
+                      )
+                          : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: _getChildren(type, _message, horizontal,
+                            separation, textStyle, hideText),
+                      ),
+                      padding: EdgeInsets.all(15),
+                    ) 
                   ),
                 );
               }),
@@ -295,10 +298,14 @@ class SimpleFontelicoProgressDialog {
           : SizedBox(
               width: separation,
             ),
-      Text(
+      horizontal ? Expanded(child:Text(
         message!,
         style: textStyle,
-      )
+      )) : Expanded(child:Text(
+          message!,
+          style: textStyle,
+      ))
+
     ];
   }
 }
