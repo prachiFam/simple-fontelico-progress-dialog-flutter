@@ -36,7 +36,7 @@ class SimpleFontelicoProgressDialog {
 
   /// Bool value to indicate the barrierDismisable of the dialog
   final bool? barrierDimisable;
-  
+
   /// Bool value to indicate if we use root navigator of the dialog
   final bool? useRootNavigator;
 
@@ -51,9 +51,9 @@ class SimpleFontelicoProgressDialog {
 
   SimpleFontelicoProgressDialog(
       {this.context,
-      this.barrierDimisable,
-      this.useRootNavigator, 
-      this.duration = const Duration(milliseconds: 1000)});
+        this.barrierDimisable,
+        this.useRootNavigator,
+        this.duration = const Duration(milliseconds: 1000)});
 
   /// Method to render the widget into the dialog
   Widget _getLoadingIndicator(SimpleFontelicoProgressDialogType type) {
@@ -190,25 +190,25 @@ class SimpleFontelicoProgressDialog {
   /// loadingIndicator: Widget to use when type is custom
   void show(
       {@required String? message,
-      SimpleFontelicoProgressDialogType type =
-          SimpleFontelicoProgressDialogType.normal,
-       bool useRootNavigator: false,
-      double height = 100,
-      double width = 120,
-      double radius = 5.0,
-      double elevation = 5.0,
-      Color backgroundColor = Colors.white,
-      Color? indicatorColor,
-      bool horizontal = false,
-      double separation = 10.0,
-      TextStyle textStyle = const TextStyle(fontSize: 14),
-      bool hideText = false,
-      Widget? loadingIndicator}) {
+        SimpleFontelicoProgressDialogType type =
+            SimpleFontelicoProgressDialogType.normal,
+        bool useRootNavigator: false,
+        double height = 100,
+        double width = 120,
+        double radius = 5.0,
+        double elevation = 5.0,
+        Color backgroundColor = Colors.white,
+        Color? indicatorColor,
+        bool horizontal = false,
+        double separation = 10.0,
+        TextStyle textStyle = const TextStyle(fontSize: 14),
+        bool hideText = false,
+        Widget? loadingIndicator}) {
     assert(context != null, 'Context must not be null');
     _indicatorColor = indicatorColor ?? Colors.blue[600];
     if (type == SimpleFontelicoProgressDialogType.custom) {
       assert(loadingIndicator != null,
-          'Loading indicator must not be null when is custom');
+      'Loading indicator must not be null when is custom');
       _customLoadingIndicator = loadingIndicator;
     }
     _isOpen = true;
@@ -226,36 +226,40 @@ class SimpleFontelicoProgressDialog {
               insetPadding: EdgeInsets.all(0.0),
               child: StatefulBuilder(
                   builder: (BuildContext _, StateSetter setState) {
-                _setState = setState;
-                return Center(
-                  child: Container(
-                    height: height,
-                    width: width,
-                    decoration: BoxDecoration(
-                        color: backgroundColor,
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(radius))),
-                    child:Padding(
-                      child : !horizontal
-                          ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: _getChildren(type, _message, horizontal,
-                            separation, textStyle, hideText),
-                      )
-                          : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: _getChildren(type, _message, horizontal,
-                            separation, textStyle, hideText),
-                      ),
-                      padding: EdgeInsets.all(15),
-                    ) 
-                  ),
-                );
-              }),
+                    _setState = setState;
+                    return Center(
+
+                        child: SizedBox(
+                          height: height,
+                          width: width,
+                          child: Container(
+
+                              decoration: BoxDecoration(
+                                  color: backgroundColor,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(radius))),
+                              child:Padding(
+                                child : !horizontal
+                                    ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: _getChildren(type, _message, horizontal,
+                                      separation, textStyle, hideText),
+                                )
+                                    : Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: _getChildren(type, _message, horizontal,
+                                      separation, textStyle, hideText),
+                                ),
+                                padding: EdgeInsets.all(15),
+                              )
+                          ),
+                        )
+                    );
+                  }),
             ),
           );
         });
@@ -293,16 +297,22 @@ class SimpleFontelicoProgressDialog {
       _getLoadingIndicator(type),
       !horizontal
           ? SizedBox(
-              height: separation,
-            )
+        height: separation,
+      )
           : SizedBox(
-              width: separation,
-            ),
-      Expanded(child:Text(
-        message!,
-        overflow: TextOverflow.ellipsis,
-        style: textStyle,
-      ))
+        width: separation,
+      ),
+
+      Expanded(child:Container(
+
+          child:Text(
+            message!,
+            maxLines: 10,
+            overflow: TextOverflow.ellipsis,
+            style: textStyle,
+          )
+      )) ,
+
 
     ];
   }
