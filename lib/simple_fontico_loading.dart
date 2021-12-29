@@ -303,15 +303,19 @@ class SimpleFontelicoProgressDialog {
         width: separation,
       ),
 
-      Expanded(child:Container(
+      Expanded(child:
+          Center(
+            child:Container(
 
-          child:Text(
-            message!,
-            maxLines: 10,
-            overflow: TextOverflow.ellipsis,
-            style: textStyle,
-          )
-      )) ,
+                child:Text(
+                  message!,
+                  maxLines: 10,
+                  textAlign:TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: textStyle,
+                )
+        )
+    )) ,
 
 
     ];
